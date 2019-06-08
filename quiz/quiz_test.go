@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bytes"
 	"encoding/csv"
+	"fmt"
 	"testing"
 	"strings"
 	"reflect"
@@ -25,4 +27,14 @@ func TestParseLines(t *testing.T) {
 	if !reflect.DeepEqual(got, expected) {
 		t.Errorf("parselines did not return expected results")
 	}
+}
+
+func TestReadFile(t *testing.T) {
+    var buffer bytes.Buffer
+    buffer.WriteString("fake, csv, data")
+    content, err := readFile(&buffer)
+    if err != nil {
+        t.Error("Failed to read csv data")
+    }
+    fmt.Print(content)
 }
